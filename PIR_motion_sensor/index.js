@@ -5,7 +5,8 @@
 
     const lcd = new LCD(1, 0x27, 16, 2);
     lcd.beginSync();
-    await lcd.printLine(0, 'Initialized')
+    await lcd.printLine(0, 'Home Security')
+    await lcd.printLine(1, 'Enabled')
     const led = new Gpio(17, 'out');       // Export GPIO17 as an output
     const msensor = new Gpio(22, 'in', 'both');
 
@@ -19,13 +20,13 @@
       if(value === 1) {
         await lcd.clear()
         await lcd.printLine(0, 'Movement')
-        await lcd.printLine(1, 'Detected')
+        await lcd.printLine(1, 'Detected!')
         return
-      } 
-      
+      }
+
       await lcd.clear()
-      await lcd.printLine(0, 'Movement')
-      await lcd.printLine(1, 'Idle')
+      await lcd.printLine(0, 'Home Security')
+      await lcd.printLine(1, 'Enabled')
     })
 
     process.on('SIGINT', _ => {

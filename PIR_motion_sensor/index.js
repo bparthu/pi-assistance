@@ -1,23 +1,20 @@
-var gpio = require("gpio");
-var gpio22, gpio4, intervalTimer;
+const Gpio = require('onoff').Gpio; // Gpio class
+const led = new Gpio(17, 'out');       // Export GPIO17 as an output
+let stopBlinking = false;
  
-// Flashing lights if LED connected to GPIO22
-gpio22 = gpio.export(22, {
-   ready: function() {
-      intervalTimer = setInterval(function() {
-         gpio22.set();
-         setTimeout(function() { gpio22.reset(); }, 500);
-      }, 1000);
-   }
-});
-
-
-// reset the headers and unexport after 10 seconds
-setTimeout(function() {
-  clearInterval(intervalTimer);          // stops the voltage cycling
-  gpio22.removeAllListeners('change');   // unbinds change event
-  gpio22.reset();                        // sets header to low
-  gpio22.unexport(() => {
-    process.exit();
-  });                     // unexport the header
-}, 10000)
+// Toggle the state of the LED connected to GPIO17 every 200ms
+const blinkLed = _ => {
+  if (stopBlinking) {
+    return led.unexport();
+  }
+ 
+  led.read()
+    .then(value => led.write(value ^ 1))
+    .then(_ => setTimeout(blinkLed, 200))
+    .catch(err => console.log(err));
+};
+ 
+blinkLed();
+ 
+// Stop blinking the LED after 5 seconds
+setTimeout(_ => stopBlinking = true, 5000);

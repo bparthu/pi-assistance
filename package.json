@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bparthu/pi-assistance#readme",
   "dependencies": {
-    "gpio": "^0.2.10"
+    "gpio": "^0.2.10",
+    "onoff": "^6.0.0"
   }
 }

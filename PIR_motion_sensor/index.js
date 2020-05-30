@@ -18,7 +18,13 @@ const blinkLed = _ => {
 msensor.watch((err, value) => {
   console.log(value)
 })
- 
+process.on('SIGINT', _ => {
+  console.log('releasing resources')
+  led.unexport();
+  button.unexport();
+  console.log('resources released')
+});
+
 blinkLed();
  
 // Stop blinking the LED after 5 seconds

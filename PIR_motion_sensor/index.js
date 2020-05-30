@@ -30,9 +30,9 @@ msensor.watch(async (err, value) => {
   await lcd.printLine(1, value)
 })
 process.on('SIGINT', _ => {
-  console.log('releasing resources')
-  msensor.unexport();
-  console.log('resources released')
+  //console.log('releasing resources')
+  //msensor.unexport();
+  //console.log('resources released')
 });
 
 blinkLed();

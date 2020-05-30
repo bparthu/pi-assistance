@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/bparthu/pi-assistance/issues"
   },
-  "homepage": "https://github.com/bparthu/pi-assistance#readme"
+  "homepage": "https://github.com/bparthu/pi-assistance#readme",
+  "dependencies": {
+    "gpio": "^0.2.10"
+  }
 }

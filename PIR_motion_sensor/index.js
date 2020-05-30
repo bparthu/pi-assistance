@@ -1,12 +1,14 @@
 const Gpio = require('onoff').Gpio; // Gpio class
 const led = new Gpio(17, 'out');       // Export GPIO17 as an output
 const msensor = new Gpio(22, 'in', 'both');
-let stopBlinking = false;
+let stopSystem = false;
  
 // Toggle the state of the LED connected to GPIO17 every 200ms
 const blinkLed = _ => {
-  if (stopBlinking) {
-    return led.unexport();
+  if (stopSystem) {
+    led.unexport();
+    msensor.unexport();
+    return;
   }
  
   led.read()
@@ -20,7 +22,6 @@ msensor.watch((err, value) => {
 })
 process.on('SIGINT', _ => {
   console.log('releasing resources')
-  //led.unexport();
   msensor.unexport();
   console.log('resources released')
 });
@@ -28,4 +29,4 @@ process.on('SIGINT', _ => {
 blinkLed();
  
 // Stop blinking the LED after 5 seconds
-setTimeout(_ => stopBlinking = true, 5000);
+setTimeout(_ => stopSystem = true, 5000);

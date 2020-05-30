@@ -13,7 +13,7 @@
       led.read()
         .then(value => led.write(value ^ 1))
         .catch(err => console.log(err));
-    })
+    }, 500)
 
     msensor.watch(async (err, value) => {
       console.log(value)

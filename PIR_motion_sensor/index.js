@@ -16,10 +16,16 @@
     }, 500)
 
     msensor.watch(async (err, value) => {
-      console.log(value)
+      if(value === 1) {
+        await lcd.clear()
+        await lcd.printLine(0, 'Movement')
+        await lcd.printLine(1, 'Detected')
+        return
+      } 
+      
       await lcd.clear()
-      await lcd.printLine(0, 'Status')
-      await lcd.printLine(1, value)
+      await lcd.printLine(0, 'Movement')
+      await lcd.printLine(1, 'Idle')
     })
 
     process.on('SIGINT', _ => {

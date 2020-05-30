@@ -1,4 +1,8 @@
 const Gpio = require('onoff').Gpio; // Gpio class
+const LCD = require('raspberrypi-liquid-crystal');
+
+const lcd = new LCD(1, 0x27, 16, 2);
+lcd.beginSync();
 const led = new Gpio(17, 'out');       // Export GPIO17 as an output
 const msensor = new Gpio(22, 'in', 'both');
 let stopSystem = false;
@@ -8,6 +12,7 @@ const blinkLed = _ => {
   if (stopSystem) {
     led.unexport();
     msensor.unexport();
+    lcd.noDisplay()
     return;
   }
  
@@ -17,8 +22,10 @@ const blinkLed = _ => {
     .catch(err => console.log(err));
 };
 
-msensor.watch((err, value) => {
+msensor.watch(async (err, value) => {
   console.log(value)
+  await lcd.printLine(0, 'Status')
+  await lcd.printLine(1, value)
 })
 process.on('SIGINT', _ => {
   console.log('releasing resources')

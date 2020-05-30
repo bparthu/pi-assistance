@@ -1,0 +1,21 @@
+{
+  "name": "pi-assistance",
+  "version": "1.0.0",
+  "description": "A webserver / personal home assistance service",
+  "main": "index.js",
+  "scripts": {
+    "start-motion-sensor": "node ./PIR_motion_sensor",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bparthu/pi-assistance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bparthu/pi-assistance/issues"
+  },
+  "homepage": "https://github.com/bparthu/pi-assistance#readme"
+}

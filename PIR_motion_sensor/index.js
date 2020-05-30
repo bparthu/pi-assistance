@@ -3,6 +3,8 @@ const LCD = require('raspberrypi-liquid-crystal');
 
 const lcd = new LCD(1, 0x27, 16, 2);
 lcd.beginSync();
+await lcd.printLine(0, 'Status')
+await lcd.printLine(1, 0)
 const led = new Gpio(17, 'out');       // Export GPIO17 as an output
 const msensor = new Gpio(22, 'in', 'both');
 let stopSystem = false;
@@ -36,4 +38,4 @@ process.on('SIGINT', _ => {
 blinkLed();
  
 // Stop blinking the LED after 5 seconds
-setTimeout(_ => stopSystem = true, 5000);
+setTimeout(_ => stopSystem = true, 15000);

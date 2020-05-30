@@ -20,7 +20,7 @@ msensor.watch((err, value) => {
 })
 process.on('SIGINT', _ => {
   console.log('releasing resources')
-  led.unexport();
+  //led.unexport();
   button.unexport();
   console.log('resources released')
 });
